@@ -1,0 +1,79 @@
+# configs/model_config.yaml
+# ─────────────────────────────────────────────────────────────
+# Multilingual Summarization & Translation Pipeline
+# Model and hyperparameter configuration
+# ─────────────────────────────────────────────────────────────
+
+# ── Pre-trained models ────────────────────────────────────────
+models:
+  summarizer: "facebook/mbart-large-cc25"
+  # Alternatives (smaller/faster):
+  #   "facebook/mbart-large-50"      → 50-language variant
+  #   "google/mt5-small"             → much smaller, lower quality
+  #   "csebuetnlp/mT5_multilingual_XLSum"  → fine-tuned for news summarization
+
+  translation_prefix: "Helsinki-NLP/opus-mt"
+  # Pattern: Helsinki-NLP/opus-mt-{src}-{tgt}
+
+# ── Custom Transformer (from-scratch architecture) ─────────────
+custom_transformer:
+  d_model: 256              # embedding dimension
+  num_heads: 8              # attention heads (d_model must be divisible)
+  num_encoder_layers: 4     # encoder depth
+  num_decoder_layers: 4     # decoder depth
+  d_ff: 1024                # feed-forward hidden dimension (4x d_model)
+  max_len: 512              # maximum sequence length
+  dropout: 0.1              # dropout rate
+  pad_idx: 0                # padding token index
+
+# ── Summarization settings ────────────────────────────────────
+summarization:
+  max_chunk_words: 350      # words per chunk (sentence-boundary aware)
+  max_summary_len: 200      # max generated summary tokens
+  min_summary_len: 50       # min generated summary tokens
+  num_beams: 4              # beam search width
+  length_penalty: 2.0       # >1 encourages longer summaries
+  no_repeat_ngram_size: 3   # prevents repetition
+
+# ── Translation settings ──────────────────────────────────────
+translation:
+  max_length: 512
+  num_beams: 5
+  no_repeat_ngram_size: 3
+  early_stopping: true
+
+# ── Evaluation ────────────────────────────────────────────────
+evaluation:
+  bleu_max_n: 4             # use up to 4-gram BLEU
+  rouge_types: ["rouge_l"]  # evaluation metrics
+
+# ── Supported languages ───────────────────────────────────────
+supported_languages:
+  - code: en
+    name: English
+  - code: ar
+    name: Arabic
+  - code: fr
+    name: French
+  - code: es
+    name: Spanish
+  - code: de
+    name: German
+  - code: zh
+    name: Chinese
+  - code: ja
+    name: Japanese
+  - code: ru
+    name: Russian
+  - code: pt
+    name: Portuguese
+  - code: it
+    name: Italian
+  - code: nl
+    name: Dutch
+  - code: tr
+    name: Turkish
+  - code: ko
+    name: Korean
+  - code: hi
+    name: Hindi

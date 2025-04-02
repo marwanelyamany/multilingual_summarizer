@@ -1,0 +1,36 @@
+# Core ML
+torch>=2.0.0
+torchvision>=0.15.0
+
+# HuggingFace ecosystem
+transformers>=4.35.0
+sentencepiece>=0.1.99
+tokenizers>=0.14.0
+datasets>=2.14.0
+
+# Language detection
+langdetect>=1.0.9
+
+# NLP utilities
+nltk>=3.8.1
+
+# Evaluation
+sacrebleu>=2.3.1
+
+# Data & visualization
+numpy>=1.24.0
+pandas>=2.0.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Notebook
+jupyter>=1.0.0
+ipywidgets>=8.0.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0
+
+# Utilities
+tqdm>=4.66.0
+ftfy>=6.1.0
